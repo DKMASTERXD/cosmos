@@ -7,101 +7,293 @@
     <title>COSMOS 🌌</title>
 
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+        }
+
+        body {
             font-family: Arial, sans-serif;
-            background: radial-gradient(circle at top, #182848, #050510 60%);
             color: white;
-            text-align: center;
             min-height: 100vh;
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(circle at 20% 20%, #172554 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, #312e81 0%, transparent 30%),
+                #020617;
+        }
+
+        /* ⭐ ESTRELLAS */
+        .stars {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            from {
+                opacity: 0.2;
+                transform: scale(0.7);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.3);
+            }
         }
 
         header {
+            text-align: center;
             padding: 80px 20px 40px;
         }
 
         h1 {
-            font-size: 60px;
-            margin-bottom: 10px;
+            font-size: 4rem;
+            letter-spacing: 8px;
+            text-shadow: 0 0 25px #60a5fa;
         }
 
-        .subtitulo {
-            font-size: 20px;
-            color: #b8c7ff;
+        header p {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: #cbd5e1;
         }
 
-        section {
-            max-width: 800px;
-            margin: 30px auto;
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
             padding: 30px;
-        }
-
-        .tarjeta {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255,255,255,0.15);
             border-radius: 20px;
-            padding: 30px;
-            margin: 20px;
+
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(10px);
+
+            transition: 0.3s;
         }
 
-        h2 {
-            font-size: 32px;
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #60a5fa;
+            box-shadow: 0 0 30px rgba(96,165,250,0.25);
         }
 
-        p {
-            font-size: 18px;
+        .card h2 {
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #cbd5e1;
             line-height: 1.6;
-            color: #d8ddff;
+        }
+
+        /* 🪐 PLANETAS */
+        .planets {
+            margin-top: 60px;
+        }
+
+        .planets h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .planet {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .planet-image {
+            width: 120px;
+            height: 120px;
+            margin: auto auto 20px;
+
+            border-radius: 50%;
+
+            background: radial-gradient(
+                circle at 35% 30%,
+                #f8fafc,
+                #64748b 35%,
+                #0f172a 70%
+            );
+
+            box-shadow: 0 0 35px rgba(255,255,255,0.25);
+        }
+
+        .mars {
+            background: radial-gradient(
+                circle at 35% 30%,
+                #fecaca,
+                #dc2626 45%,
+                #450a0a 80%
+            );
+        }
+
+        .jupiter {
+            background: linear-gradient(
+                #fef3c7 0%,
+                #d97706 20%,
+                #fef3c7 35%,
+                #92400e 50%,
+                #fef3c7 65%,
+                #d97706 85%
+            );
         }
 
         button {
-            padding: 15px 25px;
+            display: block;
+            margin: 50px auto;
+
+            padding: 15px 30px;
+
             border: none;
             border-radius: 30px;
-            font-size: 16px;
+
+            background: #2563eb;
+            color: white;
+
+            font-size: 1rem;
             cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px #2563eb;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #64748b;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.7rem;
+                letter-spacing: 5px;
+            }
         }
     </style>
 </head>
 
 <body>
 
+    <div class="stars" id="stars"></div>
+
     <header>
-        <h1>🌌 COSMOS</h1>
-        <p class="subtitulo">Un pequeño viaje por el universo</p>
+        <h1>COSMOS 🌌</h1>
+        <p>Un pequeño viaje por el universo</p>
     </header>
 
-    <section>
+    <main class="container">
 
-        <div class="tarjeta">
-            <h2>🌠 El universo</h2>
+        <section class="cards">
 
-            <p>
-                El universo contiene galaxias, estrellas, planetas,
-                nebulosas y fenómenos que todavía estamos intentando comprender.
-            </p>
-        </div>
+            <div class="card">
+                <h2>🌠 El universo</h2>
+                <p>
+                    El universo contiene galaxias, estrellas, planetas,
+                    nebulosas y muchos otros objetos fascinantes.
+                </p>
+            </div>
 
-        <div class="tarjeta">
-            <h2>🕳️ Agujeros negros</h2>
+            <div class="card">
+                <h2>🕳️ Agujeros negros</h2>
+                <p>
+                    Son regiones del espacio donde la gravedad es tan
+                    intensa que ni siquiera la luz puede escapar.
+                </p>
+            </div>
 
-            <p>
-                Son regiones del espacio donde la gravedad es tan intensa
-                que, una vez dentro del horizonte de sucesos,
-                ni siquiera la luz puede escapar.
-            </p>
-        </div>
+        </section>
+
+        <section class="planets">
+
+            <h2>🪐 Algunos planetas</h2>
+
+            <div class="cards">
+
+                <div class="card planet">
+                    <div class="planet-image"></div>
+                    <h2>🌍 Tierra</h2>
+                    <p>Nuestro hogar en medio de la inmensidad del cosmos.</p>
+                </div>
+
+                <div class="card planet">
+                    <div class="planet-image mars"></div>
+                    <h2>🔴 Marte</h2>
+                    <p>El famoso planeta rojo, vecino de la Tierra.</p>
+                </div>
+
+                <div class="card planet">
+                    <div class="planet-image jupiter"></div>
+                    <h2>🟠 Júpiter</h2>
+                    <p>El planeta más grande del Sistema Solar.</p>
+                </div>
+
+            </div>
+
+        </section>
 
         <button onclick="explorar()">
-            🚀 Explorar
+            🚀 Explorar el universo
         </button>
 
-    </section>
+    </main>
+
+    <footer>
+        <p>Hecho por Deyvid 🚀</p>
+    </footer>
 
     <script>
+
+        // ⭐ Crear estrellas automáticamente
+        const stars = document.getElementById("stars");
+
+        for (let i = 0; i < 120; i++) {
+
+            const star = document.createElement("div");
+
+            star.classList.add("star");
+
+            star.style.left = Math.random() * 100 + "%";
+            star.style.top = Math.random() * 100 + "%";
+
+            star.style.animationDelay =
+                Math.random() * 2 + "s";
+
+            stars.appendChild(star);
+        }
+
+        // 🚀 Botón
         function explorar() {
             alert("Bienvenido al COSMOS 🚀🌌");
         }
+
     </script>
 
 </body>
