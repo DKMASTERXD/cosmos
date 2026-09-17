@@ -3,28 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COSMOS</title>
+
+    <title>COSMOS 🌌</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle at top, #182848, #050510 60%);
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 80px 20px 40px;
+        }
+
+        h1 {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo {
+            font-size: 20px;
+            color: #b8c7ff;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+        }
+
+        .tarjeta {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px;
+        }
+
+        h2 {
+            font-size: 32px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #d8ddff;
+        }
+
+        button {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>🌌 COSMOS</h1>
+    <header>
+        <h1>🌌 COSMOS</h1>
+        <p class="subtitulo">Un pequeño viaje por el universo</p>
+    </header>
 
-    <h2>El universo</h2>
+    <section>
 
-    <p>
-        El universo es enorme y está lleno de galaxias,
-        estrellas, planetas y misterios que todavía estamos descubriendo.
-    </p>
+        <div class="tarjeta">
+            <h2>🌠 El universo</h2>
 
-    <h2>🕳️ Agujeros negros</h2>
+            <p>
+                El universo contiene galaxias, estrellas, planetas,
+                nebulosas y fenómenos que todavía estamos intentando comprender.
+            </p>
+        </div>
 
-    <p>
-        Un agujero negro es una región del espacio donde la gravedad
-        es tan intensa que ni siquiera la luz puede escapar.
-    </p>
+        <div class="tarjeta">
+            <h2>🕳️ Agujeros negros</h2>
 
-    <button>Explorar el universo 🚀</button>
+            <p>
+                Son regiones del espacio donde la gravedad es tan intensa
+                que, una vez dentro del horizonte de sucesos,
+                ni siquiera la luz puede escapar.
+            </p>
+        </div>
+
+        <button onclick="explorar()">
+            🚀 Explorar
+        </button>
+
+    </section>
+
+    <script>
+        function explorar() {
+            alert("Bienvenido al COSMOS 🚀🌌");
+        }
+    </script>
 
 </body>
 </html>
