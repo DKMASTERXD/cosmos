@@ -4,197 +4,489 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>COSMOS 🌌</title>
+    <title>COSMOS</title>
 
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
-
             background:
-                radial-gradient(circle at 20% 20%, #172554 0%, transparent 30%),
-                radial-gradient(circle at 80% 80%, #312e81 0%, transparent 30%),
-                #020617;
+                radial-gradient(circle at 20% 20%, rgba(73, 60, 180, 0.25), transparent 35%),
+                radial-gradient(circle at 80% 70%, rgba(0, 120, 255, 0.15), transparent 35%),
+                #050817;
+            overflow-x: hidden;
         }
 
-        /* ⭐ ESTRELLAS */
+        /* =========================
+           ESTRELLAS
+        ========================= */
+
         .stars {
             position: fixed;
             inset: 0;
+            pointer-events: none;
             z-index: -1;
             overflow: hidden;
         }
 
         .star {
             position: absolute;
-            width: 3px;
-            height: 3px;
+            width: 2px;
+            height: 2px;
             background: white;
             border-radius: 50%;
-            animation: twinkle 2s infinite alternate;
+            opacity: 0.7;
+            animation: twinkle 3s infinite ease-in-out;
         }
 
         @keyframes twinkle {
-            from {
+            0%, 100% {
                 opacity: 0.2;
-                transform: scale(0.7);
+                transform: scale(1);
             }
 
-            to {
+            50% {
                 opacity: 1;
-                transform: scale(1.3);
+                transform: scale(1.7);
             }
         }
 
-        header {
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(5, 8, 23, 0.65);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 80px 20px 40px;
+            padding: 100px 20px 60px;
         }
 
-        h1 {
-            font-size: 4rem;
-            letter-spacing: 8px;
-            text-shadow: 0 0 25px #60a5fa;
+        .hero h1 {
+            font-size: clamp(4rem, 15vw, 9rem);
+            letter-spacing: 12px;
+
+            background: linear-gradient(
+                180deg,
+                white,
+                #aebaff,
+                #6575ff
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            text-shadow:
+                0 0 30px rgba(100,120,255,0.3);
         }
 
-        header p {
+        .hero p {
+            max-width: 650px;
             margin-top: 15px;
-            font-size: 1.2rem;
-            color: #cbd5e1;
+            color: #b8bdd5;
+            font-size: 1.15rem;
+            line-height: 1.7;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            padding: 20px;
+        .hero-button {
+            margin-top: 40px;
+            padding: 16px 32px;
+
+            border: none;
+            border-radius: 50px;
+
+            background: linear-gradient(
+                135deg,
+                #386cff,
+                #704cff
+            );
+
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 0 25px rgba(65,100,255,0.45);
+
+            transition: 0.3s;
         }
+
+        .hero-button:hover {
+            transform: translateY(-4px) scale(1.03);
+
+            box-shadow:
+                0 0 45px rgba(80,110,255,0.7);
+        }
+
+        .hero-button:active {
+            transform: scale(0.96);
+        }
+
+        /* =========================
+           SECCIONES
+        ========================= */
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #9298b5;
+            margin-bottom: 50px;
+        }
+
+        /* =========================
+           TARJETAS
+        ========================= */
 
         .cards {
+            max-width: 1100px;
+            margin: auto;
+
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 25px;
         }
 
         .card {
-            padding: 30px;
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 20px;
+            position: relative;
 
-            background: rgba(15, 23, 42, 0.65);
+            padding: 35px;
+
+            border-radius: 25px;
+
+            background: rgba(18, 24, 55, 0.65);
+
+            border: 1px solid rgba(255,255,255,0.1);
+
             backdrop-filter: blur(10px);
 
-            transition: 0.3s;
+            overflow: hidden;
+
+            transition: 0.4s;
+        }
+
+        .card::before {
+            content: "";
+
+            position: absolute;
+            width: 180px;
+            height: 180px;
+
+            background: #5865ff;
+            filter: blur(90px);
+
+            opacity: 0.15;
+
+            right: -80px;
+            top: -80px;
         }
 
         .card:hover {
             transform: translateY(-8px);
-            border-color: #60a5fa;
-            box-shadow: 0 0 30px rgba(96,165,250,0.25);
+
+            border-color: rgba(130,140,255,0.35);
+
+            box-shadow:
+                0 15px 50px rgba(0,0,0,0.3);
         }
 
-        .card h2 {
-            margin-bottom: 15px;
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
         }
 
         .card p {
-            color: #cbd5e1;
-            line-height: 1.6;
+            color: #aeb4ce;
+            line-height: 1.7;
         }
 
-        /* 🪐 PLANETAS */
+        /* =========================
+           PLANETAS
+        ========================= */
+
         .planets {
-            margin-top: 60px;
+            max-width: 1200px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
         }
 
-        .planets h2 {
+        .planet-card {
+            background: rgba(15, 21, 50, 0.8);
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+            border-radius: 25px;
+
+            padding: 35px 25px;
+
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 30px;
+
+            transition: 0.4s;
+        }
+
+        .planet-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.35);
         }
 
         .planet {
-            text-align: center;
-            padding: 25px;
-        }
+            width: 170px;
+            height: 170px;
 
-        .planet-image {
-            width: 120px;
-            height: 120px;
-            margin: auto auto 20px;
+            margin: 0 auto 30px;
 
             border-radius: 50%;
 
-            background: radial-gradient(
-                circle at 35% 30%,
-                #f8fafc,
-                #64748b 35%,
-                #0f172a 70%
-            );
+            position: relative;
 
-            box-shadow: 0 0 35px rgba(255,255,255,0.25);
+            box-shadow:
+                inset -25px -20px 40px rgba(0,0,0,0.45),
+                0 0 35px rgba(120,130,255,0.15);
+
+            overflow: hidden;
         }
+
+        /* Tierra */
+
+        .earth {
+            background:
+                radial-gradient(circle at 35% 35%, #5ecbff 0 18%, transparent 19%),
+                radial-gradient(circle at 65% 55%, #4fc96a 0 12%, transparent 13%),
+                radial-gradient(circle at 35% 70%, #38a95b 0 15%, transparent 16%),
+                linear-gradient(135deg, #1265d6, #071c69);
+        }
+
+        /* Marte */
 
         .mars {
-            background: radial-gradient(
-                circle at 35% 30%,
-                #fecaca,
-                #dc2626 45%,
-                #450a0a 80%
-            );
+            background:
+                radial-gradient(circle at 30% 35%, #e77a45 0 5%, transparent 6%),
+                radial-gradient(circle at 65% 65%, #8e2f24 0 7%, transparent 8%),
+                radial-gradient(circle at 50% 20%, #c95335 0 8%, transparent 9%),
+                linear-gradient(135deg, #d95b3f, #631d1a);
         }
+
+        /* Júpiter */
 
         .jupiter {
-            background: linear-gradient(
-                #fef3c7 0%,
-                #d97706 20%,
-                #fef3c7 35%,
-                #92400e 50%,
-                #fef3c7 65%,
-                #d97706 85%
-            );
+            background:
+                radial-gradient(
+                    ellipse at 50% 55%,
+                    #9b4e22 0 7%,
+                    transparent 8%
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    #d9943e 0px,
+                    #f4d28b 18px,
+                    #b76625 35px,
+                    #f1c978 50px
+                );
         }
 
-        button {
-            display: block;
-            margin: 50px auto;
+        /* Saturno */
 
-            padding: 15px 30px;
-
-            border: none;
-            border-radius: 30px;
-
-            background: #2563eb;
-            color: white;
-
-            font-size: 1rem;
-            cursor: pointer;
-
-            transition: 0.3s;
+        .saturn {
+            background:
+                linear-gradient(135deg, #d4a15c, #73502d);
         }
 
-        button:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 25px #2563eb;
+        .saturn::after {
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 60px;
+
+            border: 12px solid rgba(220,190,130,0.65);
+
+            border-radius: 50%;
+
+            top: 55px;
+            left: -40px;
+
+            transform: rotate(-15deg);
         }
+
+        .planet-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .planet-card p {
+            color: #999fbb;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
 
         footer {
             text-align: center;
-            padding: 40px 20px;
-            color: #64748b;
+
+            padding: 70px 20px 40px;
+
+            color: #707795;
+
+            border-top: 1px solid rgba(255,255,255,0.06);
         }
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2.7rem;
-                letter-spacing: 5px;
+        footer .quote {
+            font-size: 1.2rem;
+            color: #aeb4cf;
+            margin-bottom: 15px;
+        }
+
+        .signature {
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            opacity: 0.35;
+        }
+
+        /* =========================
+           BOTÓN ARRIBA
+        ========================= */
+
+        #topButton {
+            position: fixed;
+
+            right: 20px;
+            bottom: 20px;
+
+            width: 48px;
+            height: 48px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: rgba(50,70,180,0.8);
+
+            color: white;
+
+            font-size: 1.2rem;
+
+            cursor: pointer;
+
+            opacity: 0;
+            pointer-events: none;
+
+            transition: 0.3s;
+
+            z-index: 50;
+        }
+
+        #topButton.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 16px 5%;
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 0.75rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .planets {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 80px 5%;
+            }
+
+            .hero h1 {
+                letter-spacing: 6px;
+            }
+
+            .planet {
+                width: 150px;
+                height: 150px;
             }
         }
     </style>
@@ -202,87 +494,252 @@
 
 <body>
 
+    <!-- ESTRELLAS -->
+
     <div class="stars" id="stars"></div>
 
-    <header>
-        <h1>COSMOS 🌌</h1>
-        <p>Un pequeño viaje por el universo</p>
-    </header>
 
-    <main class="container">
+    <!-- NAVBAR -->
 
-        <section class="cards">
+    <nav>
 
-            <div class="card">
-                <h2>🌠 El universo</h2>
-                <p>
-                    El universo contiene galaxias, estrellas, planetas,
-                    nebulosas y muchos otros objetos fascinantes.
-                </p>
-            </div>
+        <div class="logo">
+            COSMOS
+        </div>
 
-            <div class="card">
-                <h2>🕳️ Agujeros negros</h2>
-                <p>
-                    Son regiones del espacio donde la gravedad es tan
-                    intensa que ni siquiera la luz puede escapar.
-                </p>
-            </div>
+        <div>
+            <a href="#universo">Universo</a>
+            <a href="#planetas">Planetas</a>
+        </div>
 
-        </section>
+    </nav>
 
-        <section class="planets">
 
-            <h2>🪐 Algunos planetas</h2>
+    <!-- HERO -->
 
-            <div class="cards">
+    <header class="hero">
 
-                <div class="card planet">
-                    <div class="planet-image"></div>
-                    <h2>🌍 Tierra</h2>
-                    <p>Nuestro hogar en medio de la inmensidad del cosmos.</p>
-                </div>
+        <h1>COSMOS</h1>
 
-                <div class="card planet">
-                    <div class="planet-image mars"></div>
-                    <h2>🔴 Marte</h2>
-                    <p>El famoso planeta rojo, vecino de la Tierra.</p>
-                </div>
+        <p>
+            El universo es demasiado grande para dejar de preguntarnos
+            qué hay más allá de las estrellas.
+        </p>
 
-                <div class="card planet">
-                    <div class="planet-image jupiter"></div>
-                    <h2>🟠 Júpiter</h2>
-                    <p>El planeta más grande del Sistema Solar.</p>
-                </div>
-
-            </div>
-
-        </section>
-
-        <button onclick="explorar()">
+        <button class="hero-button" onclick="explorar()">
             🚀 Explorar el universo
         </button>
 
-    </main>
+    </header>
+
+
+    <!-- UNIVERSO -->
+
+    <section id="universo">
+
+        <h2 class="section-title">
+            Más allá de nuestro mundo
+        </h2>
+
+        <p class="section-subtitle">
+            Algunos de los fenómenos más fascinantes del universo.
+        </p>
+
+
+        <div class="cards">
+
+            <article class="card">
+
+                <div class="card-icon">
+                    🌌
+                </div>
+
+                <h3>
+                    El universo
+                </h3>
+
+                <p>
+                    Galaxias, estrellas, planetas y estructuras gigantescas
+                    forman un universo que todavía estamos intentando comprender.
+                </p>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-icon">
+                    🕳️
+                </div>
+
+                <h3>
+                    Agujeros negros
+                </h3>
+
+                <p>
+                    Regiones del espacio donde la gravedad es tan intensa
+                    que incluso la luz puede quedar atrapada.
+                </p>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-icon">
+                    ⭐
+                </div>
+
+                <h3>
+                    Estrellas
+                </h3>
+
+                <p>
+                    Enormes esferas de plasma que producen energía durante
+                    millones o incluso miles de millones de años.
+                </p>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    Exploración espacial
+                </h3>
+
+                <p>
+                    Cada misión espacial nos permite observar lugares
+                    que durante siglos solo existieron en nuestra imaginación.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- PLANETAS -->
+
+    <section id="planetas">
+
+        <h2 class="section-title">
+            🪐 Nuestro vecindario
+        </h2>
+
+        <p class="section-subtitle">
+            Algunos mundos del Sistema Solar.
+        </p>
+
+
+        <div class="planets">
+
+            <article class="planet-card">
+
+                <div class="planet earth"></div>
+
+                <h3>
+                    Tierra
+                </h3>
+
+                <p>
+                    Nuestro hogar. El único planeta conocido
+                    que alberga vida.
+                </p>
+
+            </article>
+
+
+            <article class="planet-card">
+
+                <div class="planet mars"></div>
+
+                <h3>
+                    Marte
+                </h3>
+
+                <p>
+                    El planeta rojo, cubierto de enormes volcanes,
+                    valles y antiguos paisajes.
+                </p>
+
+            </article>
+
+
+            <article class="planet-card">
+
+                <div class="planet jupiter"></div>
+
+                <h3>
+                    Júpiter
+                </h3>
+
+                <p>
+                    El planeta más grande del Sistema Solar,
+                    famoso por su enorme tormenta.
+                </p>
+
+            </article>
+
+
+            <article class="planet-card">
+
+                <div class="planet saturn"></div>
+
+                <h3>
+                    Saturno
+                </h3>
+
+                <p>
+                    Un gigante gaseoso conocido por su espectacular
+                    sistema de anillos.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
 
     <footer>
-        <p>Explora. Descubre. Imagina.</p> 
 
-<span class="signature">DK</span>.signature {
-    display: block;
-    margin-top: 12px;
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    opacity: 0.45;
-}
+        <p class="quote">
+            Explora. Descubre. Imagina.
+        </p>
+
+        <span class="signature">
+            DK
+        </span>
+
     </footer>
+
+
+    <!-- BOTÓN ARRIBA -->
+
+    <button id="topButton" onclick="volverArriba()">
+        ↑
+    </button>
+
+
+    <!-- JAVASCRIPT -->
 
     <script>
 
-        // ⭐ Crear estrellas automáticamente
-        const stars = document.getElementById("stars");
+        /* =========================
+           CREAR ESTRELLAS
+        ========================= */
 
-        for (let i = 0; i < 120; i++) {
+        const starsContainer = document.getElementById("stars");
+
+        for (let i = 0; i < 140; i++) {
 
             const star = document.createElement("div");
 
@@ -292,14 +749,59 @@
             star.style.top = Math.random() * 100 + "%";
 
             star.style.animationDelay =
-                Math.random() * 2 + "s";
+                Math.random() * 3 + "s";
 
-            stars.appendChild(star);
+            star.style.animationDuration =
+                (2 + Math.random() * 4) + "s";
+
+            starsContainer.appendChild(star);
         }
 
-        // 🚀 Botón
+
+        /* =========================
+           BOTÓN EXPLORAR
+        ========================= */
+
         function explorar() {
-            alert("🌌 El universo te espera. Comienza a explorar.");
+
+            document.getElementById("universo").scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =========================
+           BOTÓN VOLVER ARRIBA
+        ========================= */
+
+        const topButton =
+            document.getElementById("topButton");
+
+
+        window.addEventListener("scroll", function () {
+
+            if (window.scrollY > 500) {
+
+                topButton.classList.add("show");
+
+            } else {
+
+                topButton.classList.remove("show");
+
+            }
+
+        });
+
+
+        function volverArriba() {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
 
     </script>
 
